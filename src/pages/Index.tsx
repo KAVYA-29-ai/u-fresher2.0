@@ -9,7 +9,7 @@ import CollegeDetail from '@/components/college/CollegeDetail';
 import MentorDirectory from '@/components/mentor/MentorDirectory';
 import MentorProfile from '@/components/mentor/MentorProfile';
 import AboutPage from '@/components/AboutPage';
-import ChatSystem from '@/components/chat/ChatSystem';
+
 import ProjectHub from '@/components/project/ProjectHub';
 
 export type Page = 
@@ -68,7 +68,6 @@ const Index = () => {
     <UserProvider>
       <div className="min-h-screen bg-background">
         {renderCurrentPage()}
-        <ChatSystem />
         <Toaster />
       </div>
     </UserProvider>

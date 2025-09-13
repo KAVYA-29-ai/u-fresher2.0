@@ -202,7 +202,6 @@ const CollegeDetail: React.FC<CollegeDetailProps> = ({ collegeId, showPage }) =>
   const tabs = [
     { id: 'posts', label: 'Community Posts', icon: MessageCircle },
     { id: 'clubs', label: 'Clubs & Societies', icon: Users },
-    { id: 'chat', label: 'Chat Rooms', icon: Hash },
     { id: 'collab', label: 'Collaborations', icon: Trophy }
   ];
 
@@ -346,70 +345,6 @@ const CollegeDetail: React.FC<CollegeDetailProps> = ({ collegeId, showPage }) =>
                   </CardContent>
                 </Card>
               ))}
-            </div>
-          )}
-
-          {activeTab === 'chat' && (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Room List */}
-              <Card className="glass-card">
-                <CardHeader>
-                  <CardTitle>Chat Rooms</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {chatRooms.map((room) => (
-                    <button
-                      key={room.id}
-                      onClick={() => setActiveRoom(room.id)}
-                      className={`w-full text-left p-3 rounded-lg transition-all ${
-                        activeRoom === room.id ? 'bg-primary text-primary-foreground' : 'bg-muted/20 hover:bg-muted/40'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-medium">#{room.name}</span>
-                        <span className="text-xs opacity-70">{room.members}</span>
-                      </div>
-                    </button>
-                  ))}
-                </CardContent>
-              </Card>
-
-              {/* Chat Area */}
-              <div className="lg:col-span-2">
-                <Card className="glass-card h-96">
-                  <CardHeader>
-                    <CardTitle className="flex items-center space-x-2">
-                      <Hash className="w-5 h-5" />
-                      <span>{activeRoom}</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="flex flex-col h-full">
-                    <div className="flex-1 overflow-y-auto space-y-3 mb-4">
-                      {currentRoomMessages.map((msg, index) => (
-                        <div key={index} className="flex space-x-3">
-                          <span className="text-lg">{msg.avatar}</span>
-                          <div>
-                            <div className="flex items-center space-x-2">
-                              <span className="font-medium text-sm">{msg.user}</span>
-                              <span className="text-xs text-muted-foreground">{msg.time}</span>
-                            </div>
-                            <p className="text-sm">{msg.message}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <div className="flex space-x-2">
-                      <Input
-                        placeholder="Type a message..."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                      />
-                      <Button className="btn-hero">Send</Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
             </div>
           )}
 
