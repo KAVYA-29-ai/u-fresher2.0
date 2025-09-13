@@ -3,6 +3,7 @@ import { Menu, X, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useUser } from '@/contexts/UserContext';
 import { Page } from '@/pages/Index';
+import logoImage from '@/assets/logo.png';
 
 interface NavbarProps {
   showPage: (page: Page) => void;
@@ -48,11 +49,13 @@ const Navbar: React.FC<NavbarProps> = ({ showPage, onAuthClick }) => {
           {/* Logo */}
           <div 
             onClick={() => handleNavClick('landing')}
-            className="flex items-center space-x-2 cursor-pointer"
+            className="flex items-center space-x-3 cursor-pointer"
           >
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">UF</span>
-            </div>
+            <img 
+              src={logoImage} 
+              alt="U Fresher Logo" 
+              className="w-10 h-10 object-contain"
+            />
             <span className="text-xl font-bold gradient-text hidden sm:block">
               U Fresher
             </span>

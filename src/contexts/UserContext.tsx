@@ -15,6 +15,7 @@ export interface User {
 interface UserContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<boolean>;
+  signup: (name: string, email: string, password: string, role: 'fresher' | 'mentor') => Promise<boolean>;
   logout: () => void;
   joinCommunity: (collegeId: string) => void;
   joinProject: (projectId: string) => void;
@@ -87,6 +88,27 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     return false;
   };
 
+  const signup = async (name: string, email: string, password: string, role: 'fresher' | 'mentor'): Promise<boolean> => {
+    // Create new user
+    const newUser: User = {
+      id: `${role}_${Date.now()}`,
+      email,
+      name,
+      role,
+      avatar: role === 'fresher' ? '👨‍🎓' : '👩‍🏫',
+      college: '',
+      joinedCommunities: [],
+      projects: []
+    };
+    
+    setUser(newUser);
+    localStorage.setItem('ufresher_user', JSON.stringify(newUser));
+    toast.success('Account Created Successfully!', {
+      description: `Welcome to U Fresher, ${name}!`
+    });
+    return true;
+  };
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem('ufresher_user');
@@ -125,6 +147,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     <UserContext.Provider value={{
       user,
       login,
+      signup,
       logout,
       joinCommunity,
       joinProject

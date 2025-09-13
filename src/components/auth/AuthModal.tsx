@@ -24,7 +24,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode, showPage }
   const [rememberMe, setRememberMe] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   
-  const { login } = useUser();
+  const { login, signup } = useUser();
 
   if (!isOpen) return null;
 
@@ -73,8 +73,17 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, mode, showPage }
         }
       }
     } else {
-      // Signup logic would go here
-      console.log('Signup:', { ...formData, mode });
+      // Signup logic
+      const success = await signup(formData.name, formData.email, formData.password, mode);
+      if (success) {
+        onClose();
+        // Redirect to appropriate dashboard based on mode
+        if (mode === 'fresher') {
+          showPage('fresher-dashboard');
+        } else {
+          showPage('mentor-dashboard');
+        }
+      }
     }
   };
 
