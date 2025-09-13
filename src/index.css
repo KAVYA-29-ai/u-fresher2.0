@@ -59,8 +59,10 @@
     @apply border-border;
   }
   
+  
+  /* Default dark theme is baked into :root colors */
   html {
-    @apply dark;
+    /* Dark mode is default via tokens; add class="dark" on html to switch tokens if needed */
   }
   
   body {
